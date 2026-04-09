@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Workflow Generator</title>
+  <link rel="stylesheet" href="../diagram/styles.css">
+  <link rel="stylesheet" href="theme.css">
+  <style>
+    .toolbar { gap: 10px; flex-wrap: wrap; align-items: center; }
+    #status { padding: 6px 12px; font-size: 13px; color: #555; }
+    label { font-size: 13px; display: flex; align-items: center; gap: 6px; }
+
+    #story-panel {
+      position: fixed;
+      top: 60px;
+      right: 0;
+      width: 340px;
+      height: calc(100vh - 60px);
+      background: var(--element-bg);
+      border-left: 1px solid var(--element-border);
+      padding: 16px;
+      overflow-y: auto;
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 200;
+      box-shadow: -4px 0 12px rgba(0,0,0,0.15);
+    }
+    #story-panel.open { display: flex; }
+    #story-panel-close {
+      align-self: flex-end;
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      color: var(--text-color);
+      padding: 2px 6px;
+    }
+    #story-panel-content { display: flex; flex-direction: column; gap: 14px; }
+    .story-section { display: flex; flex-direction: column; gap: 4px; }
+    .story-section-label {
+      font-size: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.5;
+    }
+    .story-section-text { font-size: 13px; line-height: 1.55; }
+
+    .story-icon {
+      cursor: pointer;
+      opacity: 0.55;
+      transition: opacity 0.15s;
+    }
+    .story-icon:hover { opacity: 1; }
+
+    /* ── Subprocess panel styles removed — rendered on canvas ── */
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="toolbar">
+      <button id="theme-toggle">Toggle Theme</button>
+      <button id="expand-all">Expand All Processes</button>
+      <button id="collapse-all">Collapse All</button>
+      <label>Elements: <input type="file" id="elements-file" accept=".csv"></label>
+      <label>Connections: <input type="file" id="connections-file" accept=".csv"></label>
+      <label>User Stories: <input type="file" id="userstories-file" accept=".csv"></label>
+      <button id="load-btn">Generate Diagram</button>
+      <button id="save-btn">Save Diagram</button>
+      <button id="fix-btn">Fix Overlaps</button>
+      <label>Load Diagram: <input type="file" id="diagram-file" accept=".json"></label>
+      <span id="status">Select both CSV files then click Generate.</span>
+    </div>
+    <div id="canvas-container">
+      <svg id="canvas" width="100%" height="100%">
+        <defs>
+          <marker id="arrowhead" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
+    <div id="story-panel">
+      <button id="story-panel-close">✕</button>
+      <div id="story-panel-content"></div>
+    </div>
+
+    <!-- Subprocess panel removed — rendered directly on canvas via subprocess-panel.js -->
+    <div class="palette">
+      <div class="palette-item" data-type="start">Start</div>
+      <div class="palette-item" data-type="end">End</div>
+      <div class="palette-item" data-type="process">Process</div>
+      <div class="palette-item" data-type="decision-x">Decision X</div>
+      <div class="palette-item" data-type="decision-plus">Decision +</div>
+      <div class="palette-item" data-type="comment">Comment</div>
+      <div class="palette-item" data-type="external">External</div>
+      <div class="palette-item" data-type="arrow">Arrow</div>
+    </div>
+  </div>
+  <script src="../diagram/app.js"></script>
+  <script src="overlap-fixer.js"></script>
+  <script src="subprocess-panel.js"></script>
+  <script src="generator.js"></script>
+</body>
+</html>
