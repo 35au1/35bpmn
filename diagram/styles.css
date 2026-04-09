@@ -1,0 +1,249 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --element-bg: #f0f0f0;
+    --element-border: #333333;
+    --arrow-color: #000000;
+    --grid-color: #e0e0e0;
+}
+
+[data-theme="dark"] {
+    --bg-color: #1e1e1e;
+    --text-color: #ffffff;
+    --element-bg: #2d2d2d;
+    --element-border: #cccccc;
+    --arrow-color: #ffffff;
+    --grid-color: #3d3d3d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow: hidden;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.toolbar {
+    padding: 10px;
+    background-color: var(--element-bg);
+    border-bottom: 1px solid var(--element-border);
+    display: flex;
+    gap: 10px;
+}
+
+.toolbar button {
+    padding: 8px 16px;
+    background-color: var(--element-bg);
+    color: var(--text-color);
+    border: 1px solid var(--element-border);
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.toolbar button:hover {
+    opacity: 0.8;
+}
+
+#canvas-container {
+    flex: 1;
+    position: relative;
+    overflow: auto;
+    background-image: 
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+#canvas {
+    min-width: 2000px;
+    min-height: 2000px;
+}
+
+.palette {
+    position: fixed;
+    right: 20px;
+    top: 80px;
+    background-color: var(--element-bg);
+    border: 1px solid var(--element-border);
+    border-radius: 4px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.palette-item {
+    padding: 10px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--element-border);
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.palette-item:hover {
+    opacity: 0.7;
+}
+
+.bpmn-element {
+    cursor: move;
+    user-select: none;
+}
+
+.start-element, .end-element {
+    fill: var(--element-bg);
+    stroke: var(--element-border);
+    stroke-width: 2;
+}
+
+.process-box {
+    fill: var(--element-bg);
+    stroke: var(--element-border);
+    stroke-width: 2;
+}
+
+.decision-box {
+    fill: var(--element-bg);
+    stroke: var(--element-border);
+    stroke-width: 2;
+}
+
+.comment-box {
+    fill: var(--element-bg);
+    stroke: var(--element-border);
+    stroke-width: 1;
+    stroke-dasharray: 5,5;
+}
+
+.external-dot {
+    fill: var(--element-bg);
+    stroke: var(--element-border);
+    stroke-width: 2;
+}
+
+.arrow-line {
+    stroke: var(--arrow-color);
+    stroke-width: 2;
+    fill: none;
+    marker-end: url(#arrowhead);
+}
+
+.external-line {
+    stroke: var(--arrow-color);
+    stroke-width: 2;
+    stroke-dasharray: 5,5;
+    fill: none;
+}
+
+.element-text {
+    fill: var(--text-color);
+    font-size: 12px;
+    text-anchor: middle;
+    pointer-events: none;
+}
+
+.arrow-label {
+    fill: var(--text-color);
+    font-size: 11px;
+    text-anchor: middle;
+    background: var(--bg-color);
+}
+
+.expanded-process {
+    opacity: 0.3;
+}
+
+.subprocess-container {
+    stroke: var(--element-border);
+    stroke-width: 1;
+    stroke-dasharray: 3,3;
+    fill: none;
+}
+
+.connection-point {
+    fill: #4CAF50;
+    stroke: var(--element-border);
+    stroke-width: 2;
+    cursor: crosshair;
+    opacity: 0;
+    transition: all 0.2s;
+    pointer-events: all;
+}
+
+.bpmn-element:hover .connection-point {
+    opacity: 0.6;
+}
+
+.connection-point:hover {
+    opacity: 1 !important;
+    fill: #4CAF50;
+}
+
+.selected-point {
+    opacity: 1 !important;
+    fill: #2196F3;
+}
+
+.arrow-mode .connection-point {
+    opacity: 0.8;
+}
+
+.arrow-corner {
+    fill: #FF9800;
+    stroke: #F57C00;
+    stroke-width: 2;
+    cursor: move;
+}
+
+.arrow-corner:hover {
+    fill: #FFC107;
+}
+
+.segment-handle {
+    fill: #FF9800;
+    stroke: #F57C00;
+    stroke-width: 2;
+    cursor: move;
+    opacity: 0.7;
+}
+
+.segment-handle:hover {
+    opacity: 1;
+    fill: #FFC107;
+}
+
+.add-port-btn {
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    font-weight: bold;
+}
+
+.bpmn-element:hover .add-port-btn {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.add-port-btn:hover {
+    opacity: 1 !important;
+}
+
+.arrow-path {
+    cursor: pointer;
+}
+
+.arrow-path:hover {
+    stroke-width: 3;
+}
