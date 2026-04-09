@@ -1,0 +1,9 @@
+﻿element_id,element_name,element_type,lock_keyword,user_assigned,comment_text,text_below
+START_001,Start,start,,,,
+PROC_001,Wprowadzenie danych faktury,user_action_process,lock_noterasable,Operator,,
+PROC_002,Akceptacja przez Approvera,user_action_process,lock_noteditable,Approver,,
+PROC_003,Decyzja Administratora,user_action_process,lock_noteditable,Administrator,,
+DEC_001,Czy Approver jest Senior Managerem?,system_decision,,,,
+ACT_001,Dodanie dodatkowego Senior Managera,system_action,,,System dopisuje dodatkowego approvera na poziomie Senior Managera,
+DEC_002,Czy Approver nadal jest managerem pracownika?,system_decision,,,,
+END_001,Wniosek zamknięty,end,,,,

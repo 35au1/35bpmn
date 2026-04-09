@@ -1,0 +1,12 @@
+﻿connection_id,source_element_id,target_element_id,condition,connection_type,button,validation,trigger
+CONN_001,START_001,PROC_001,,normal,,,await
+CONN_002,PROC_001,DEC_001,,normal,Wyślij do akceptacji,Approver wskazany,button
+CONN_003,DEC_001,PROC_002,Tak,conditional,,,await
+CONN_004,DEC_001,ACT_001,Nie,conditional,,,await
+CONN_005,ACT_001,PROC_002,,normal,,,await
+CONN_006,PROC_002,PROC_001,Odrzucony,conditional,Reject,,button
+CONN_007,PROC_002,PROC_003,Zatwierdzony,conditional,Approve,,button
+CONN_008,PROC_003,PROC_002,Przekazanie do ponownej akceptacji,conditional,Przekaż do akceptacji,,button
+CONN_009,PROC_003,DEC_002,Zamknij wniosek,conditional,Zamknij,,button
+CONN_010,DEC_002,END_001,Tak,conditional,,,await
+CONN_011,DEC_002,PROC_002,Nie,conditional,,,await
